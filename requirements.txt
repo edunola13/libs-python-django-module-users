@@ -1,0 +1,8 @@
+Django>=3.0
+django-filter>=2.2.0
+djangorestframework>=3.10.3
+django-simple-email-confirmation>=0.60
+django-rest-passwordreset>=1.1.0
+celery>=4.1.1
+
+factory_boy
