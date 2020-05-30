@@ -18,7 +18,7 @@ Quick start
 
 2. Include the module users URLconf in your project urls.py like this::
 
-    path('users/', include('users.urls')),
+    path('u/', include('django_module_users.urls')),
 
 Or add the custom rule like you wish.
 

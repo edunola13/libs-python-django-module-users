@@ -3,8 +3,6 @@ from __future__ import unicode_literals
 
 import factory
 
-from django.conf import settings
-
 from rest_framework.test import APITestCase, APIClient
 
 from django.contrib.auth import get_user_model
@@ -21,7 +19,7 @@ class UserFactory(factory.DjangoModelFactory):
     email = factory.LazyAttribute(lambda x: x.username)
     password = '123456'
     first_name = "Api"
-    last_name = "RFID"
+    last_name = "USERS"
     is_staff = False
     is_active = True
 
