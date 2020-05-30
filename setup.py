@@ -8,7 +8,7 @@ README = open(os.path.join(path, 'README.md')).read()
 
 setup(
     name='django_module_users',
-    version='0.1',
+    version='0.2',
     packages=find_packages(),
     description='Django Module Users',
     long_description=README,
