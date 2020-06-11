@@ -45,7 +45,6 @@ class User(SimpleEmailConfirmationUserMixin, AbstractUser):
             username=username,
             email=email,
             password=password,
-            is_staff=True,
             **extra_fields
         )
 
@@ -108,7 +107,7 @@ class Permission(models.Model):
         related_name="+",
         on_delete=models.CASCADE,
         null=True)
-    object_id = models.PositiveIntegerField(null=True)
+    object_id = models.CharField(max_length=50, null=True)
     object_related = GenericForeignKey('content_type', 'object_id')
 
 

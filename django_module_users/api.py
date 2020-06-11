@@ -8,11 +8,12 @@ from rest_framework import status, viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAdminUser
 
 from rest_framework.exceptions import (
     ValidationError,
 )
+
+from django_module_users import app_settings
 
 from .models import ApiKey, Role, Permission
 
@@ -29,7 +30,7 @@ class UserViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
                   mixins.ListModelMixin, GenericViewSet):
     queryset = User.objects.all().prefetch_related('groups', 'role_set')
     serializer_class = UserSerializer
-    permission_classes = (IsAdminUser, )
+    permission_classes = app_settings.PERMISSIONS
 
     __basic_fields = ('username',)
     filter_fields = __basic_fields + ('groups', 'is_staff', 'is_active', 'type')
@@ -89,7 +90,7 @@ class UserViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
 
 
 class ApiKeyViewSet(mixins.RetrieveModelMixin, mixins.DestroyModelMixin, GenericViewSet):
-    permission_classes = [IsAdminUser]
+    permission_classes = app_settings.PERMISSIONS
 
     queryset = ApiKey.objects.all()
     serializer_class = ApiKeySerializer
@@ -117,7 +118,7 @@ class ApiKeyViewSet(mixins.RetrieveModelMixin, mixins.DestroyModelMixin, Generic
 
 
 class RoleViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAdminUser]
+    permission_classes = app_settings.PERMISSIONS
 
     queryset = Role.objects.all().prefetch_related('permissions')
     serializer_class = RoleSerializer
@@ -175,7 +176,7 @@ class RoleViewSet(viewsets.ModelViewSet):
 
 
 class PermissionViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAdminUser]
+    permission_classes = app_settings.PERMISSIONS
 
     queryset = Permission.objects.all()
     serializer_class = PermissionSerializer

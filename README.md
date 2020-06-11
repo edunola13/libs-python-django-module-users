@@ -28,6 +28,8 @@ Or add the custom rule like you wish.
 	- DEFAULT_FROM_EMAIL: Email from send emails.
     - FRONT_URL: URL used in emails to go back to web site.
 	- CELERY_*: Celery options.
+    - DJ_MOD_USERS: Module users specific settings:
+        - PERMISSIONS: Permissions for admin api.
 
 4. Run ``python manage.py migrate`` to create the users models.
 
