@@ -76,16 +76,17 @@ class UserMeView(APIView):
 
 
 class ConfirmEmailView(APIView):
+    permission_classes = (AllowAny, )
 
     def post(self, request):
         serializer = ConfirmEmailSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         key = serializer.validated_data['key']
-        pk = serializer.validated_data['id']
+        email = serializer.validated_data['email']
 
         try:
-            user = User.objects.get(pk=pk)
+            user = User.objects.get(email=email)
             user.confirm_email(key)
         except:
             raise ValidationError(
@@ -100,6 +101,7 @@ class ConfirmEmailView(APIView):
 
 
 class ResendEmailView(APIView):
+    permission_classes = (AllowAny, )
 
     def post(self, request):
         serializer = ResendEmailSerializer(data=request.data)

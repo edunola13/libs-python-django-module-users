@@ -83,6 +83,14 @@ class ApiKeyUserSerializer(serializers.ModelSerializer):
         return "{}...".format(obj.key[:10])
 
 
+class UserMinSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'first_name', 'last_name',
+                  'is_confirmed', 'is_active', 'type')
+
+
 class UserSerializer(serializers.ModelSerializer):
     groups = GroupSerializer(many=True, read_only=True)
     groups_id = serializers.PrimaryKeyRelatedField(source='groups', queryset=Group.objects.all(), write_only=True, many=True)
@@ -155,7 +163,7 @@ class UserMeSerializer(serializers.ModelSerializer):
 
 
 class ConfirmEmailSerializer(serializers.Serializer):
-    id = serializers.IntegerField(required=True)
+    email = serializers.EmailField(required=True)
     key = serializers.CharField(max_length=6, required=True)
 
 

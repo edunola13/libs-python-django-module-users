@@ -93,7 +93,7 @@ class User(SimpleEmailConfirmationUserMixin, AbstractUser):
             {
                 'link_confirmation': '{}/confirm/{}/{}'.format(
                     settings.FRONT_URL,
-                    self.id,
+                    self.email,
                     self.confirmation_key
                 )
             }
